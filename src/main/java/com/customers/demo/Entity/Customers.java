@@ -26,13 +26,16 @@ public class Customers<JSON> {
     String contact;
 
     @Column(nullable = true)
+    String entity;
+
+    @Column(nullable = true)
     String email;
 
     @Column(nullable = true)
     String gstin;
 
-    // @Column(nullable = true)
-    // JSON notes;
+    @Column(nullable = true)
+    String shipping_address;
 
     @Column(nullable = true)
     Long created_at;

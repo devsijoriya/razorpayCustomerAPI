@@ -1,6 +1,7 @@
 package com.customers.demo.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.customers.demo.DTO.CustomerRequestDTO;
@@ -13,5 +14,5 @@ public interface CustomerService {
 
     CustomerResponseDTO getCustomer(UUID id);
 
-    List<CustomerResponseDTO> fetchCustomer(int count, int skip);
+    Map<String, Object> fetchAllCustomer(int count, int skip);
 }

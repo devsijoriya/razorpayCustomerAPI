@@ -1,5 +1,6 @@
 package com.customers.demo.Controller;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class CustomerController {
     @GetMapping("/customers")
     public ResponseEntity<CustomerResponseDTO> getCustomer(@RequestParam UUID id) {
         return new ResponseEntity<>(customerService.getCustomer(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/allcustomers")
+    public Map<String, Object> fetchAllCustomer(@RequestParam(defaultValue = "10") int count,
+            @RequestParam(defaultValue = "0") int skip) {
+        return customerService.fetchAllCustomer(count, skip);
     }
 
 }

@@ -1,7 +1,12 @@
 package com.customers.demo.ServiceImpl;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.customers.demo.DTO.CustomerRequestDTO;
@@ -94,9 +99,25 @@ public class CustomerServiceImpl implements CustomerService {
         customerResponseDTO.setContact(customers.getContact());
         customerResponseDTO.setEmail(customers.getEmail());
         customerResponseDTO.setGstin(customers.getGstin());
+        customerResponseDTO.setEntity(customers.getEntity());
+        customerResponseDTO.setShipping_address(customers.getShipping_address());
         customerResponseDTO.setCreated_at(customers.getCreated_at());
 
         return customerResponseDTO;
+    }
+
+    @Override
+    public Map<String, Object> fetchAllCustomer(int count, int skip) {
+        Pageable pageable = PageRequest.of(skip / count, count);
+
+        Page<Customers> page = customerRepository.findAll(pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("count", page.getTotalElements()); // total records in DB
+        response.put("items", page.getContent()); // paginated data
+
+        return response;
+
     }
 
 }
